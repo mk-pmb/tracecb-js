@@ -46,7 +46,7 @@ function makeTracer() {
   }
 
   function traceCb(hint, origCb) {
-    if (hint.apply) {
+    if (hint && hint.apply) {
       origCb = hint;
       hint = undefined;
     } else if (!origCb) {
@@ -80,6 +80,21 @@ function makeTracer() {
 
   traceCb.cbs = [];
   traceCb.dumpLog = function () { traceCb.cbs.forEach(dumpCbInfo); };
+  traceCb.nextCb = function (hint, task) {
+    // Intercept task(args, …, next) to check whether it calls next().
+    if (hint && hint.apply) {
+      task = hint;
+      hint = undefined;
+    }
+    return function interceptedTask() {
+      var ar = Array.prototype.slice.call(arguments), nx = ar[ar.length - 1];
+      if (!(nx || false).apply) { throw new Error('no next task'); }
+      nx = traceCb(hint, nx);
+      nx.taskName = task.name;
+      ar[ar.length - 1] = nx;
+      return task.apply(this, ar);
+    };
+  };
   return traceCb;
 }
 
