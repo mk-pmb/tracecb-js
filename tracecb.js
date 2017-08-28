@@ -22,6 +22,23 @@ function dumpFalsey(x) {
 }
 
 
+function dumpCbInfo(cb) {
+  cb = Object.assign({}, cb);
+  delete cb.installedFrom;
+  delete cb.time;
+  (function (invo) {
+    if (invo.length === 0) { return delete cb.invo; }
+    invo.forEach(function (i) {
+      delete i.time;
+      delete i.from;
+    });
+    if (invo.length === 1) { invo = invo[0]; }
+    cb.invo = invo;
+  }(cb.invo));
+  console.dir(cb);
+}
+
+
 function makeTracer() {
   if (arguments.length !== 0) {
     throw new Error('The tracer factory accepts no arguments.'
@@ -62,6 +79,7 @@ function makeTracer() {
   }
 
   traceCb.cbs = [];
+  traceCb.dumpLog = function () { traceCb.cbs.forEach(dumpCbInfo); };
   return traceCb;
 }
 
