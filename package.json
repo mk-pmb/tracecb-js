@@ -1,0 +1,30 @@
+{ "name": "tracecb",
+  "version": "1.0.0",
+  "description": "How often was my callback called, from where, with which arguments?",
+  "keywords": [ "callback", "stack", "trace" ],
+
+  "author": "M.K. (https://github.com/mk-pmb)",
+  "homepage": "https://github.com/mk-pmb/tracecb-js/#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mk-pmb/tracecb-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mk-pmb/tracecb-js/issues"
+  },
+  "contributors": [],
+
+  "private": false, "license": "ISC",
+
+  "main": "tracecb.js",
+  "scripts": { "test": "nodejs test.usage.js" },
+  "directories": { "test": "test" },
+
+  "dependencies": {},
+  "devDependencies": {
+    "equal-pmb": "^0.1.6"
+  },
+
+
+  "npm vs. BOM = Unexpected token": "-*- coding: UTF-8 -*-"
+}
