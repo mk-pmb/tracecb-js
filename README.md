@@ -45,30 +45,30 @@ afterTest(function verifyCallbackLog() {
     invoCnt: 3, origName: JSON.stringify.name,
     invo: [
       { args: [ { hello: 'world' }, null, 2 ], ctx: undefined,
-        result: '{\n  "hello": "world"\n}',
-        from: placeholder.traceArray, threw: false },
+        result: '{\n  "hello": "world"\n}', threw: false,
+        time: placeholder.number, from: placeholder.traceArray },
       { args: [ { pi: 3.1415 } ], ctx: undefined,
-        result: '{"pi":3.1415}',
-        from: placeholder.traceArray, threw: false },
+        result: '{"pi":3.1415}', threw: false,
+        time: placeholder.number, from: placeholder.traceArray },
       { args: [ placeholder.func ], ctx: { foo: toJson, bar: 'qux' },
-        result: undefined,
-        from: placeholder.traceArray, threw: false },
+        result: undefined, threw: false,
+        time: placeholder.number, from: placeholder.traceArray },
     ] });
 
   equal(simplifyLogCb(trCb.cbs[1]), { installedFrom: placeholder.traceArray,
     invoCnt: 1, origName: 'task1',
     invo: [
       { args: [ placeholder.func ], ctx: undefined,
-        result: 1.11,
-        from: placeholder.traceArray, threw: false }
+        result: 1.11, threw: false,
+        time: placeholder.number, from: placeholder.traceArray },
     ] });
 
   equal(simplifyLogCb(trCb.cbs[2]), { installedFrom: placeholder.traceArray,
     invoCnt: 1, origName: 'task2',
     invo: [
       { args: [ placeholder.func ], ctx: undefined,
-        result: 2.22,
-        from: placeholder.traceArray, threw: false }
+        result: 2.22, threw: false,
+        time: placeholder.number, from: placeholder.traceArray },
     ] });
 
   equal(simplifyLogCb(trCb.cbs[3]), { installedFrom: placeholder.traceArray,
@@ -81,24 +81,24 @@ afterTest(function verifyCallbackLog() {
       { args: [ placeholder.error('Oh noez!'),
                 [undefined, undefined] ],
         ctx: undefined,
-        result: undefined,
-        from: placeholder.traceArray, threw: false }
+        result: undefined, threw: false,
+        time: placeholder.number, from: placeholder.traceArray },
     ] });
 
   equal(simplifyLogCb(trCb.cbs[5]), { installedFrom: placeholder.traceArray,
     invoCnt: 1, hint: 'done 1',
     invo: [
       { args: [ null ], ctx: undefined,
-        result: undefined,
-        from: placeholder.traceArray, threw: false }
+        result: undefined, threw: false,
+        time: placeholder.number, from: placeholder.traceArray },
     ] });
 
   equal(simplifyLogCb(trCb.cbs[6]), { installedFrom: placeholder.traceArray,
     invoCnt: 1, hint: 'done 2',
     invo: [
       { args: [ placeholder.error('Oh noez!') ], ctx: undefined,
-        result: undefined,
-        from: placeholder.traceArray, threw: false }
+        result: undefined, threw: false,
+        time: placeholder.number, from: placeholder.traceArray },
     ] });
 
   equal(trCb.cbs[7], undefined);

@@ -1,5 +1,5 @@
 { "name": "tracecb",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "How often was my callback called, from where, with which arguments?",
   "keywords": [ "callback", "stack", "trace" ],
 
